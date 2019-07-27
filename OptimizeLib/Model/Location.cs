@@ -19,6 +19,7 @@ namespace OptimizeLib.Model
         {
             var res = new LocationResult();
             res.Location = this;
+            res.MaxTime = maxTime;
             foreach (var oper in Opers)
             {
                 var vh = oper.GetVehicleResult(Square, maxTime);

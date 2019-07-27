@@ -26,5 +26,12 @@ namespace OptimizeLib.Model
                 return res;
             }
         }
+
+        [System.ComponentModel.DisplayName("Учетная стоимость")]
+        public double Cost
+        {
+            get;
+            set;
+        }
     }
 }
