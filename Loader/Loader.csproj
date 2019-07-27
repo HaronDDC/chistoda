@@ -70,7 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModelLoader.cs" />
+    <Compile Include="DatabaseHelper.cs" />
     <Compile Include="DataModels\ChistoDatabase.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

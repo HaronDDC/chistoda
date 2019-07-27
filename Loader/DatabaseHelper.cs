@@ -10,7 +10,7 @@ using Task = DataModels.Task;
 
 namespace Loader
 {
-    public static class ModelLoader
+    public static class DatabaseHelper
     {
 		/// <summary>
 		/// Create task using task template.
