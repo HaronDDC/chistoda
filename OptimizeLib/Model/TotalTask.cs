@@ -76,7 +76,55 @@ namespace OptimizeLib.Model
             return res;
         }
 
-        private static void CreateTestLocations(TotalTask task)
+        public static TotalTask CreateTestTask()
+        {
+            var task = new TotalTask();
+            CreateTestVehicles(task);
+            CreateTestOpers(task);
+
+            var loc = new Location();
+            loc.Square = 10000;
+            loc.LocationName = "Красная площадь";
+            loc.Opers.Add(task.Opers[0]);
+            loc.Opers.Add(task.Opers[1]);
+            task.Locations.Add(loc);
+
+            loc = new Location();
+            loc.Square = 20000;
+            loc.LocationName = "Манежная площадь";
+            loc.Opers.Add(task.Opers[1]);
+            loc.Opers.Add(task.Opers[2]);
+            task.Locations.Add(loc);
+
+            loc = new Location();
+            loc.Square = 30000;
+            loc.LocationName = "Поселок Северный";
+            loc.Opers.Add(task.Opers[0]);
+            loc.Opers.Add(task.Opers[2]);
+            task.Locations.Add(loc);
+
+            for (int i = 1; i < 10; i++)
+            {
+                loc = new Location();
+                loc.Square = 30000 + i * 10;
+                loc.LocationName = "Поселок Северный" + i.ToString();
+                loc.Opers.Add(task.Opers[i % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 1) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 2) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 3) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 4) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 5) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 6) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 7) % task.Opers.Count]);
+
+                task.Locations.Add(loc);
+            }
+
+
+            return task;
+        }
+
+        private static TotalTask CreateTestLocations(TotalTask task)
         {
             var loc = new Location();
             loc.Square = 10000;
@@ -98,7 +146,7 @@ namespace OptimizeLib.Model
             loc.Opers.Add(task.Opers[0]);
             loc.Opers.Add(task.Opers[2]);
             task.Locations.Add(loc);
-        }
+        
 
             for (int i = 1; i < 10; i++)
             {
@@ -116,7 +164,6 @@ namespace OptimizeLib.Model
 
                 task.Locations.Add(loc);
             }
-            
 
             return task;
         }
