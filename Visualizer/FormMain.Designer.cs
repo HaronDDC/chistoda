@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pageMain = new System.Windows.Forms.TabPage();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.pnlTop = new System.Windows.Forms.Panel();
@@ -39,12 +42,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblResultTest = new System.Windows.Forms.Label();
             this.gvDistrib = new System.Windows.Forms.DataGridView();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
+            this.chartMain = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pageMain.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.pnlTop.SuspendLayout();
@@ -52,9 +53,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.edtMaxTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edtVehCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDistrib)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.pnlMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartMain)).BeginInit();
             this.SuspendLayout();
             // 
             // pageMain
@@ -64,7 +64,7 @@
             this.pageMain.Location = new System.Drawing.Point(4, 22);
             this.pageMain.Name = "pageMain";
             this.pageMain.Padding = new System.Windows.Forms.Padding(3);
-            this.pageMain.Size = new System.Drawing.Size(907, 855);
+            this.pageMain.Size = new System.Drawing.Size(991, 855);
             this.pageMain.TabIndex = 0;
             this.pageMain.Text = "Решеине задачи оптимизации";
             this.pageMain.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(915, 881);
+            this.tabControl.Size = new System.Drawing.Size(999, 881);
             this.tabControl.TabIndex = 2;
             // 
             // pnlTop
@@ -86,7 +86,7 @@
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(3, 3);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(901, 101);
+            this.pnlTop.Size = new System.Drawing.Size(985, 101);
             this.pnlTop.TabIndex = 2;
             // 
             // btnCalc
@@ -95,12 +95,13 @@
             this.btnCalc.BackColor = System.Drawing.Color.SteelBlue;
             this.btnCalc.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnCalc.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnCalc.Location = new System.Drawing.Point(576, 18);
+            this.btnCalc.Location = new System.Drawing.Point(660, 18);
             this.btnCalc.Name = "btnCalc";
             this.btnCalc.Size = new System.Drawing.Size(320, 70);
             this.btnCalc.TabIndex = 3;
             this.btnCalc.Text = "Рассчитать";
             this.btnCalc.UseVisualStyleBackColor = false;
+            this.btnCalc.Click += new System.EventHandler(this.BtnCalc_Click);
             // 
             // grpParameters
             // 
@@ -197,34 +198,17 @@
             this.gvDistrib.Size = new System.Drawing.Size(213, 297);
             this.gvDistrib.TabIndex = 1;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(240, 82);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(213, 297);
-            this.dataGridView1.TabIndex = 2;
-            // 
             // pnlMain
             // 
-            this.pnlMain.Controls.Add(this.label5);
-            this.pnlMain.Controls.Add(this.dataGridView2);
+            this.pnlMain.Controls.Add(this.chartMain);
             this.pnlMain.Controls.Add(this.label4);
             this.pnlMain.Controls.Add(this.label3);
-            this.pnlMain.Controls.Add(this.dataGridView1);
             this.pnlMain.Controls.Add(this.gvDistrib);
             this.pnlMain.Controls.Add(this.lblResultTest);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(3, 104);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(901, 748);
+            this.pnlMain.Size = new System.Drawing.Size(985, 748);
             this.pnlMain.TabIndex = 3;
             // 
             // label3
@@ -245,35 +229,29 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Распределение по предприятиям\r\n";
             // 
-            // dataGridView2
+            // chartMain
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToOrderColumns = true;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(469, 82);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(213, 297);
-            this.dataGridView2.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(465, 38);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(212, 41);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Типов техники в предприятии";
+            this.chartMain.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.Name = "ChartArea1";
+            this.chartMain.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartMain.Legends.Add(legend1);
+            this.chartMain.Location = new System.Drawing.Point(240, 82);
+            this.chartMain.Name = "chartMain";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartMain.Series.Add(series1);
+            this.chartMain.Size = new System.Drawing.Size(729, 300);
+            this.chartMain.TabIndex = 7;
+            this.chartMain.Text = "chart1";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(915, 881);
+            this.ClientSize = new System.Drawing.Size(999, 881);
             this.Controls.Add(this.tabControl);
             this.Name = "FormMain";
             this.Text = "ЧистоДа. Оптимизация расходов на санитарную уборку улиц";
@@ -286,10 +264,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.edtMaxTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edtVehCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDistrib)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.pnlMain.ResumeLayout(false);
             this.pnlMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartMain)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -306,13 +283,11 @@
         private System.Windows.Forms.NumericUpDown edtVehCost;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlMain;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridView gvDistrib;
         private System.Windows.Forms.Label lblResultTest;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartMain;
     }
 }
 

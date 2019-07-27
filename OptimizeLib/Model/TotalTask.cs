@@ -63,18 +63,21 @@ namespace OptimizeLib.Model
 
             var loc = new Location();
             loc.Square = 10000;
+            loc.LocationName = "Красная площадь";
             loc.Opers.Add(task.Opers[0]);
             loc.Opers.Add(task.Opers[1]);
             task.Locations.Add(loc);
 
             loc = new Location();
             loc.Square = 20000;
+            loc.LocationName = "Манежная площадь";
             loc.Opers.Add(task.Opers[1]);
             loc.Opers.Add(task.Opers[2]);
             task.Locations.Add(loc);
 
             loc = new Location();
             loc.Square = 30000;
+            loc.LocationName = "Поселок Северный";
             loc.Opers.Add(task.Opers[0]);
             loc.Opers.Add(task.Opers[2]);
             task.Locations.Add(loc);

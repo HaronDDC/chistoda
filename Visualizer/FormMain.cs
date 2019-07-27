@@ -74,5 +74,32 @@ namespace Visualizer
             //}
             return task;
         }
+
+        private void BtnCalc_Click(object sender, EventArgs e)
+        {
+            UpdateChart();
+
+        }
+
+        private void UpdateChart()
+        {
+            if (gvDistrib.SelectedRows == null ||
+                gvDistrib.SelectedRows.Count == 0)
+                return;
+            int selectedResult = gvDistrib.SelectedRows[0].Index;
+            var result = _result[selectedResult];
+
+            chartMain.Series.Clear();
+            foreach (var loc in result.LocResult)
+            {
+                foreach (var vr in loc.VehicleResult)
+                {
+                    var ser = chartMain.Series.FindByName(vr.Vehicle.Name);
+                    if (ser == null)
+                        ser = chartMain.Series.Add(vr.Vehicle.Name);
+                    ser.Points.AddXY(loc.Location.LocationName, vr.Count);
+                }
+            }
+        }
     }
 }
