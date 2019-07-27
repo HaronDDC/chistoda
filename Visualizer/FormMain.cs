@@ -27,8 +27,6 @@ namespace Visualizer
         {
             _task = CreateTest();
             UpdateSolution();
-            //gvTechOpers.DataSource = _task.Opers;
-
         }
 
         private void UpdateSolution()
@@ -38,37 +36,22 @@ namespace Visualizer
             double maxTime = Convert.ToInt32(edtMaxTime.Value);
             _result = _task.GetTotalResults(30, maxTime, out _bestIdx);
             gvDistrib.DataSource = _result;
+            UpdateResultCaption();
+
+            if (_bestIdx >= 0)
+            {
+                if ((gvDistrib.SelectedRows != null) && (gvDistrib.SelectedRows.Count != 0))
+                {
+                    int selIdx = gvDistrib.SelectedRows[0].Index;
+                    gvDistrib.Rows[selIdx].Selected = false;
+                }
+                gvDistrib.Rows[_bestIdx].Selected = true;
+            }
         }
 
         private TotalTask CreateTest()
         {
             var task = TotalTask.CreateTestTask();
-            //List<double> x = new List<double>();
-            //List<string> xstr = new List<string>();
-            //List<double> y = new List<double>();
-            //List<double> ycost = new List<double>();
-
-            //for (double i = 800; i < 1200; i += 30)
-            //{
-            //    x.Add(i);
-            //    y.Add(task.GetVehicleCount(i));
-            //    ycost.Add(task.GetCost(i));
-            //}
-
-            //// Set title.
-            //this.chart1.Series.Clear();
-            //this.chart2.Series.Clear();
-
-            //this.chart1.Titles.Add("Vehicle count/Cost");
-
-            //// Add series.
-            //var serCount = this.chart1.Series.Add("Vehicle count");
-            //var serCost = this.chart2.Series.Add("Normalized cost");
-            //for (int i = 0; i < x.Count; i++)
-            //{
-            //    serCount.Points.AddXY(x[i], y[i]);
-            //    serCost.Points.AddXY(x[i], ycost[i]);
-            //}
             return task;
         }
 
@@ -94,6 +77,15 @@ namespace Visualizer
             return result;
         }
 
+        private void UpdateResultCaption()
+        {
+            if (_bestIdx >= 0)
+                lblResult.Text = $"Оптимальное суммарное количество техники: {_result[_bestIdx].Count}\r\nСуммарная учетная стоимость: {_result[_bestIdx].Cost} руб.\r\nВремя работы: {(int)_result[_bestIdx].MaxTime} мин.";
+            else
+                lblResult.Text = "";
+
+        }
+
         private void UpdateCostChart()
         {
             var result = GetCurentResult();
@@ -102,7 +94,7 @@ namespace Visualizer
 
             chartCost.Series.Clear();
 
-            var ser = chartCost.Series.Add("Учетная стоимость на предприятии");
+            var ser = chartCost.Series.Add("Учетная стоимость");
             ser.ChartType = SeriesChartType.Bar;
             foreach (var loc in result.LocResult)
             {

@@ -50,6 +50,7 @@
             this.edtVehCost = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.lblResult = new System.Windows.Forms.Label();
             this.pageMain.SuspendLayout();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartCost)).BeginInit();
@@ -77,6 +78,7 @@
             // 
             // pnlMain
             // 
+            this.pnlMain.Controls.Add(this.lblResult);
             this.pnlMain.Controls.Add(this.chartCost);
             this.pnlMain.Controls.Add(this.chartMain);
             this.pnlMain.Controls.Add(this.label3);
@@ -96,13 +98,13 @@
             this.chartCost.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chartCost.Legends.Add(legend1);
-            this.chartCost.Location = new System.Drawing.Point(575, 6);
+            this.chartCost.Location = new System.Drawing.Point(575, 55);
             this.chartCost.Name = "chartCost";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartCost.Series.Add(series1);
-            this.chartCost.Size = new System.Drawing.Size(405, 718);
+            this.chartCost.Size = new System.Drawing.Size(405, 660);
             this.chartCost.TabIndex = 8;
             this.chartCost.Text = "chart1";
             // 
@@ -115,13 +117,13 @@
             this.chartMain.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chartMain.Legends.Add(legend2);
-            this.chartMain.Location = new System.Drawing.Point(329, 6);
+            this.chartMain.Location = new System.Drawing.Point(329, 55);
             this.chartMain.Name = "chartMain";
             series2.ChartArea = "ChartArea1";
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chartMain.Series.Add(series2);
-            this.chartMain.Size = new System.Drawing.Size(248, 718);
+            this.chartMain.Size = new System.Drawing.Size(248, 660);
             this.chartMain.TabIndex = 7;
             this.chartMain.Text = "chart1";
             // 
@@ -284,6 +286,16 @@
             this.tabControl.Size = new System.Drawing.Size(999, 881);
             this.tabControl.TabIndex = 2;
             // 
+            // lblResult
+            // 
+            this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblResult.ForeColor = System.Drawing.Color.SteelBlue;
+            this.lblResult.Location = new System.Drawing.Point(357, 6);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(611, 65);
+            this.lblResult.TabIndex = 9;
+            this.lblResult.Text = "Единиц техники от времени";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,6 +340,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartCost;
         private System.Windows.Forms.NumericUpDown edtCountCost;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblResult;
     }
 }
 
