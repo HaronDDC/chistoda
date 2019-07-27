@@ -36,7 +36,7 @@ namespace OptimizeLib.Model
             }
             return res;
         }
-   
+
         public TotalResult GetTotalResult(double maxTime)
         {
             var res = new TotalResult();
@@ -52,15 +52,11 @@ namespace OptimizeLib.Model
         public double GetCost(double maxTime)
         {
             var lres = GetTotalResult(maxTime);
-            return (maxTime * TimeCost) * lres.Count; 
+            return (maxTime * TimeCost) * lres.Count;
         }
 
-        public static TotalTask CreateTestTask()
+        private static void CreateTestLocations(TotalTask task)
         {
-            var task = new TotalTask();
-            CreateTestVehicles(task);
-            CreateTestOpers(task);
-
             var loc = new Location();
             loc.Square = 10000;
             loc.LocationName = "Красная площадь";
@@ -81,7 +77,14 @@ namespace OptimizeLib.Model
             loc.Opers.Add(task.Opers[0]);
             loc.Opers.Add(task.Opers[2]);
             task.Locations.Add(loc);
+        }
 
+        public static TotalTask CreateTestTask()
+        {
+            var task = new TotalTask();
+            CreateTestVehicles(task);
+            CreateTestOpers(task);
+            CreateTestLocations(task);
             return task;
         }
 
@@ -113,7 +116,6 @@ namespace OptimizeLib.Model
 
             oper = new TechOper() { Speed = 10, Vehicle = task.Vehicles[2] };
             task.Opers.Add(oper);
-
         }
     }
 }

@@ -18,6 +18,9 @@ namespace TestOptimize
 			Console.WriteLine("Создана задача по шаблону: {0}", taskId);
 			Console.ReadLine();
 
+			// загрузить задачу (или задачи) и наполнить данными модель
+			var assignment = DatabaseHelper.LoadAssignmentInput(new[] { taskId });
+
 
 			//var task = TotalTask.CreateTestTask();
 
