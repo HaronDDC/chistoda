@@ -133,8 +133,9 @@ namespace DataModels
 	[Table(Schema="public", Name="equipment_compatibility")]
 	public partial class EquipmentCompatibility
 	{
-		[Column("vehicle_type_id"),   NotNull] public int VehicleTypeId   { get; set; } // integer
-		[Column("equipment_type_id"), NotNull] public int EquipmentTypeId { get; set; } // integer
+		[Column("vehicle_type_id"),   NotNull] public int     VehicleTypeId   { get; set; } // integer
+		[Column("equipment_type_id"), NotNull] public int     EquipmentTypeId { get; set; } // integer
+		[Column("factor"),            NotNull] public decimal Factor          { get; set; } // numeric
 
 		#region Associations
 

@@ -41,7 +41,7 @@ namespace OptimizeLib.Model
             globalOptimalIdx = FindGlobalOptimalIdx(res);
             return res;
         }
-   
+
         public TotalResult GetTotalResult(double maxTime)
         {
             var res = new TotalResult();
@@ -76,12 +76,8 @@ namespace OptimizeLib.Model
             return res;
         }
 
-        public static TotalTask CreateTestTask()
+        private static void CreateTestLocations(TotalTask task)
         {
-            var task = new TotalTask();
-            CreateTestVehicles(task);
-            CreateTestOpers(task);
-
             var loc = new Location();
             loc.Square = 10000;
             loc.LocationName = "Красная площадь";
@@ -102,6 +98,7 @@ namespace OptimizeLib.Model
             loc.Opers.Add(task.Opers[0]);
             loc.Opers.Add(task.Opers[2]);
             task.Locations.Add(loc);
+        }
 
             for (int i = 1; i < 10; i++)
             {
