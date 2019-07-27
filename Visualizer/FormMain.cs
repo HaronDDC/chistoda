@@ -15,13 +15,14 @@ namespace Visualizer
     public partial class FormMain : Form
     {
         private TotalTask _task = new TotalTask();
+        private List<TotalResult> _result = new List<TotalResult>();
         public FormMain()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
+        {            
             LoadTask();
         }
 
@@ -29,10 +30,18 @@ namespace Visualizer
         private void LoadTask()
         {
             _task = CreateTest();
-            gvTechOpers.DataSource = _task.Opers;
+            UpdateSolution();
+            //gvTechOpers.DataSource = _task.Opers;
 
         }
 
+        private void UpdateSolution()
+        {
+            _task.TimeCost = Convert.ToDouble(edtVehCost.Value);
+            double maxTime = Convert.ToInt32(edtMaxTime.Value);
+            _result = _task.GetTotalResults(30, maxTime);
+            gvDistrib.DataSource = _result;
+        }
 
         private TotalTask CreateTest()
         {

@@ -12,6 +12,10 @@ namespace OptimizeLib.Model
 
         public List<LocationResult> LocResult { get => _locResult; }
 
+        [System.ComponentModel.DisplayName("Время работы(мин)")]
+        public double MaxTime { get; set; }
+
+        [System.ComponentModel.DisplayName("Количество единиц техники")]
         public int Count
         {
             get

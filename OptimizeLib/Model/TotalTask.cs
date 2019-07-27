@@ -8,7 +8,9 @@ namespace OptimizeLib.Model
 {
     public class TotalTask
     {
-        private const double TimeCost = 50;
+        private const double DeltaTime = 30;
+
+        private double _timeCost = 50;
 
         private List<Location> _locations = new List<Location>();
         private List<TechOper> _opers = new List<TechOper>();
@@ -20,9 +22,25 @@ namespace OptimizeLib.Model
 
         public List<TechOper> Opers { get => _opers; }
 
+        public double TimeCost { get { return _timeCost; } set { _timeCost = value; } }
+
+        public List<TotalResult> GetTotalResults(double startTime, double timeLong)
+        {
+            var res = new List<TotalResult>();
+            double t = startTime;
+            while (t <= timeLong)
+            {
+                var tr = GetTotalResult(t);
+                res.Add(tr);
+                t += DeltaTime;
+            }
+            return res;
+        }
+   
         public TotalResult GetTotalResult(double maxTime)
         {
             var res = new TotalResult();
+            res.MaxTime = maxTime;
             foreach (var loc in Locations)
             {
                 var lres = loc.GetLocationResult(maxTime);
@@ -80,8 +98,6 @@ namespace OptimizeLib.Model
             vh.Code = 3;
             vh.Name = "Поливайка";
             task.Vehicles.Add(vh);
-
-
         }
 
         private static void CreateTestOpers(TotalTask task)
