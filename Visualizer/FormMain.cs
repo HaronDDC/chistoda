@@ -90,16 +90,41 @@ namespace Visualizer
             var result = _result[selectedResult];
 
             chartMain.Series.Clear();
+            Dictionary<string, int> pointIdx = new Dictionary<string, int>();
+            int locIdx = 0;
+            foreach (var loc in _task.Locations)
+            {
+                string locName = loc.LocationName;
+                pointIdx[locName] = locIdx;
+                foreach (var veh in _task.Vehicles)
+                {
+                    var ser = chartMain.Series.FindByName(veh.Name);
+                    if (ser == null)
+                    {
+                        ser = chartMain.Series.Add(veh.Name);
+                        ser.ChartType = SeriesChartType.Column;
+                    }
+                    ser.Points.AddXY(locName, 0);
+                }
+                locIdx++;
+            }
+
             foreach (var loc in result.LocResult)
             {
+                string locName = loc.Location.LocationName;
                 foreach (var vr in loc.VehicleResult)
                 {
                     var ser = chartMain.Series.FindByName(vr.Vehicle.Name);
                     if (ser == null)
+                    {
                         ser = chartMain.Series.Add(vr.Vehicle.Name);
-                    ser.Points.AddXY(loc.Location.LocationName, vr.Count);
+                        ser.ChartType = SeriesChartType.Column;
+                    }
+                    ser.Points[pointIdx[locName]].YValues = new double[] { vr.Count };
+                    //ser.Points.AddXY(locName, vr.Count);
                 }
             }
+
         }
     }
 }
