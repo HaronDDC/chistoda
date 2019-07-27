@@ -91,17 +91,18 @@
             // 
             this.chartCost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.AxisX.Interval = 1D;
             chartArea1.Name = "ChartArea1";
             this.chartCost.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chartCost.Legends.Add(legend1);
-            this.chartCost.Location = new System.Drawing.Point(729, 6);
+            this.chartCost.Location = new System.Drawing.Point(575, 6);
             this.chartCost.Name = "chartCost";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartCost.Series.Add(series1);
-            this.chartCost.Size = new System.Drawing.Size(251, 718);
+            this.chartCost.Size = new System.Drawing.Size(405, 718);
             this.chartCost.TabIndex = 8;
             this.chartCost.Text = "chart1";
             // 
@@ -120,7 +121,7 @@
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chartMain.Series.Add(series2);
-            this.chartMain.Size = new System.Drawing.Size(370, 718);
+            this.chartMain.Size = new System.Drawing.Size(248, 718);
             this.chartMain.TabIndex = 7;
             this.chartMain.Text = "chart1";
             // 
