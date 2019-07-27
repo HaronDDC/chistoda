@@ -73,11 +73,55 @@ namespace Assignment
                 }
             }
 
+            #region Not
             // нет допустимого решения
             if (result.Count < rowCount)
             {
+                //// считаем кол нулей в строках
+                //List<Tuple<int, int>> rows = new List<Tuple<int, int>>();
 
+                //for (int i = 0; i < rowCount; i++)
+                //{
+                //    int countZero = 0;
+                //    for (int j = 0; j < columnCount; j++)
+                //    {
+                //        int cell = input[i, j];
+                //        if (cell == 0)
+                //        {
+                //            countZero++;
+                //        }
+                //    }
+                //    rows.Add(new Tuple<int, int>(i, countZero));
+                //}
+
+                //rows.Sort(new ZeroComparer());
+                //rows.Reverse();                
+
+                //// считаем кол нулей в столбцах
+                //List<Tuple<int, int>> columns = new List<Tuple<int, int>>();
+                //for (int j = 0; j < columnCount; j++)                    
+                //{
+                //    int countZero = 0;
+                //    for (int i = 0; i < rowCount; i++)
+                //    {
+                //        int cell = input[i, j];
+                //        if (cell == 0)
+                //        {
+                //            countZero++;
+                //        }
+                //    }
+                //    columns.Add(new Tuple<int, int>(j, countZero));
+                //}
+
+                //columns.Sort(new ZeroComparer());
+                //columns.Reverse();
+
+                //if (rows[0].Item2 > columns[0].Item2)
+                //{
+
+                //}
             }
+            #endregion Not
 
             return result;
         }
