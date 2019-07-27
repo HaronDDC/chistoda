@@ -63,8 +63,9 @@ namespace DataModels
 	[Table(Schema="public", Name="companies")]
 	public partial class Company
 	{
-		[Column("id"),   PrimaryKey, Identity] public int    Id   { get; set; } // integer
-		[Column("name"), NotNull             ] public string Name { get; set; } // character varying
+		[Column("id"),     PrimaryKey, Identity] public int     Id     { get; set; } // integer
+		[Column("name"),   NotNull             ] public string  Name   { get; set; } // character varying
+		[Column("square"), NotNull             ] public decimal Square { get; set; } // numeric
 
 		#region Associations
 
