@@ -90,45 +90,6 @@ namespace Visualizer
             var result = _result[selectedResult];
 
             chartMain.Series.Clear();
-
-            //var serAge = chartMain.Series.Add("Age");
-            //var serScore = chartMain.Series.Add("Score");
-
-            //serAge.Points.AddXY("Max", 1);
-            //serAge.Points.AddXY("Carl", 2);
-            //serAge.Points.AddXY("Fedor", 3);
-            //serAge.Points.AddXY("Sasha", 4);
-
-            //serScore.Points.AddXY("Max", 10);
-            //serScore.Points.AddXY("Carl", 20);
-            //serScore.Points.AddXY("Fedor", 30);
-            //serScore.Points.AddXY("Sasha", 40);
-            //return;
-
-            //List<string> listVeh = new List<string>() { "Age", "Score" };
-            //List<string> listLocation = new List<string>() { "Max", "Carl", "Fedor", "Sasha" };
-
-            //Dictionary<string, Dictionary<string, int>> aaa = new Dictionary<string, Dictionary<string, int>>();
-            //aaa["Max"] = new Dictionary<string, int>() { { "Age", 1 }, { "Score", 2 } };
-            //aaa["Carl"] = new Dictionary<string, int>() { { "Age", 3 }, { "Score", 4 } };
-            //aaa["Fedor"] = new Dictionary<string, int>() { { "Age", 5 }, { "Score", 6 } };
-            //aaa["Sasha"] = new Dictionary<string, int>() { { "Age", 7 }, { "Score", 8 } };
-
-            //foreach (var l in listLocation)
-            //{
-
-            //    foreach (var v in listVeh)
-            //    {
-            //        var ser = chartMain.Series.FindByName(v);
-            //        if (ser == null)
-            //        {
-            //            ser = chartMain.Series.Add(v);
-            //            ser.ChartType = SeriesChartType.Column;
-            //        }
-            //        ser.Points.AddXY(l, aaa[l][v]);
-            //    }
-            //}
-            //return;
             Dictionary<string, int> pointIdx = new Dictionary<string, int>();
             int locIdx = 0;
             foreach (var loc in _task.Locations)
