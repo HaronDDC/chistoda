@@ -10,7 +10,9 @@ namespace OptimizeLib.Model
     {
         private const double DeltaTime = 30;
 
-        private double _timeCost = 50;
+        private static double _timeCost = 50;
+
+        private static double _timeCountCost = 50;
 
         private List<Location> _locations = new List<Location>();
         private List<TechOper> _opers = new List<TechOper>();
@@ -22,9 +24,11 @@ namespace OptimizeLib.Model
 
         public List<TechOper> Opers { get => _opers; }
 
-        public double TimeCost { get { return _timeCost; } set { _timeCost = value; } }
+        public static double TimeUsingCost { get { return _timeCost; } set { _timeCost = value; } }
 
-        public List<TotalResult> GetTotalResults(double startTime, double timeLong)
+        public static double TimeCountCost { get { return _timeCountCost; } set { _timeCountCost = value; } }
+
+        public List<TotalResult> GetTotalResults(double startTime, double timeLong, out int globalOptimalIdx)
         {
             var res = new List<TotalResult>();
             double t = startTime;
@@ -34,6 +38,7 @@ namespace OptimizeLib.Model
                 res.Add(tr);
                 t += DeltaTime;
             }
+            globalOptimalIdx = FindGlobalOptimalIdx(res);
             return res;
         }
    
@@ -46,13 +51,29 @@ namespace OptimizeLib.Model
                 var lres = loc.GetLocationResult(maxTime);
                 res.LocResult.Add(lres);
             }
+            res.Cost = GetCostMetrics(maxTime, res.Count);
             return res;
         }
 
-        public double GetCost(double maxTime)
+        public static double GetCostMetrics(double maxTime, int vehCount)
         {
-            var lres = GetTotalResult(maxTime);
-            return (maxTime * TimeCost) * lres.Count; 
+            return maxTime * TimeUsingCost * vehCount + vehCount  * TimeCountCost;
+        }
+
+        private int FindGlobalOptimalIdx(List<TotalResult> lst)
+        {
+            int res = -1;
+            double resOptimal = double.MaxValue;
+            for (int i = 0; i < lst.Count; i++)
+            {
+                if ((res == -1) || (lst[i].Cost < resOptimal))
+                {
+                    res = i;
+                    resOptimal = lst[i].Cost;
+                }
+
+            }
+            return res;
         }
 
         public static TotalTask CreateTestTask()
@@ -82,6 +103,24 @@ namespace OptimizeLib.Model
             loc.Opers.Add(task.Opers[2]);
             task.Locations.Add(loc);
 
+            for (int i = 1; i < 10; i++)
+            {
+                loc = new Location();
+                loc.Square = 30000 + i * 10;
+                loc.LocationName = "Поселок Северный" + i.ToString();
+                loc.Opers.Add(task.Opers[i % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 1) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 2) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 3) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 4) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 5) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 6) % task.Opers.Count]);
+                loc.Opers.Add(task.Opers[(i + 7) % task.Opers.Count]);
+
+                task.Locations.Add(loc);
+            }
+            
+
             return task;
         }
 
@@ -101,6 +140,15 @@ namespace OptimizeLib.Model
             vh.Code = 3;
             vh.Name = "Поливайка";
             task.Vehicles.Add(vh);
+
+            for (int i = 0; i < 5; i++)
+            {
+                vh = new Vehicle();
+                vh.Code = 4 + i;
+                vh.Name = "Поливайка" + i.ToString();
+                task.Vehicles.Add(vh);
+
+            }
         }
 
         private static void CreateTestOpers(TotalTask task)
@@ -113,6 +161,13 @@ namespace OptimizeLib.Model
 
             oper = new TechOper() { Speed = 10, Vehicle = task.Vehicles[2] };
             task.Opers.Add(oper);
+
+            for (int i = 0; i < 8; i++)
+            {
+                oper = new TechOper() { Speed = 1 + i, Vehicle = task.Vehicles[i] };
+                task.Opers.Add(oper);
+
+            }
 
         }
     }
