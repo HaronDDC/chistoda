@@ -81,6 +81,12 @@ namespace DataModels
 		[Association(ThisKey="Id", OtherKey="CompanyId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
 		public IEnumerable<CompanyVehicle> Companyvehiclescompanyidfkeys { get; set; }
 
+		/// <summary>
+		/// tasks_company_id_fkey_BackReference
+		/// </summary>
+		[Association(ThisKey="Id", OtherKey="CompanyId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
+		public IEnumerable<Task> Taskscompanyidfkeys { get; set; }
+
 		#endregion
 	}
 
@@ -275,8 +281,15 @@ namespace DataModels
 		[Column("name"),             NotNull             ] public string         Name           { get; set; } // character varying
 		[Column("date"),             NotNull             ] public DateTimeOffset Date           { get; set; } // timestamp (0) with time zone
 		[Column("quantity"),         NotNull             ] public decimal        Quantity       { get; set; } // numeric
+		[Column("company_id"),       NotNull             ] public int            CompanyId      { get; set; } // integer
 
 		#region Associations
+
+		/// <summary>
+		/// tasks_company_id_fkey
+		/// </summary>
+		[Association(ThisKey="CompanyId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="tasks_company_id_fkey", BackReferenceName="Taskscompanyidfkeys")]
+		public Company Company { get; set; }
 
 		/// <summary>
 		/// operations_task_id_fkey_BackReference

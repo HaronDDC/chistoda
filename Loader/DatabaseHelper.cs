@@ -13,6 +13,23 @@ namespace Loader
 {
     public static class DatabaseHelper
     {
+        // Создаем задания для всех локаций
+        public static int[] CreateTasks(int templateTaskId, string name)
+        {
+            var tasks = new List<int>();
+            var companies = LoadCompanies(null);
+            using (var db = new ChistoDatabase())
+            {
+                foreach (var company in companies)
+                {
+                    var square = company.Square;
+                    tasks.Add(CreateTask(templateTaskId, name, square));
+                }
+            }
+
+            return tasks.ToArray();
+        }
+
 		/// <summary>
 		/// Create task using task template.
 		/// </summary>
@@ -116,6 +133,11 @@ namespace Loader
         {
             using (var db = new ChistoDatabase())
             {
+                if (companyIds == null)
+                {
+                    return db.Companies.ToList();
+                }
+
                 return db.Companies.Where(c => companyIds.Contains(c.Id)).ToList();
             }
         }
@@ -131,6 +153,46 @@ namespace Loader
         private static void LoadRealVehicles(TotalTask task)
         {
 
+        }
+
+        public static TotalTask LoadTotalTask(int[] taskIds, List<OptVehicle> vehicles)
+        {
+            using (var db = new ChistoDatabase())
+            {
+                // Технологические операции
+                var operationQuery =
+                    from to in db.Operations
+                    where taskIds.Contains(to.TaskId)
+                    select new
+                    {
+                        to.Task.CompanyId,
+                        to.TemplateOperation.VehicleTypeId,
+                        to.TemplateOperation.Speed,
+                    };
+
+                var operations = operationQuery.ToList();
+                var opers = operations.Select(op => new TechOper
+                {
+                    CompanyID = op.CompanyId,
+                    Speed = Convert.ToDouble(op.Speed),
+                    Vehicle = vehicles.FirstOrDefault(x => x.VehicleTypeId == op.VehicleTypeId),
+                }).ToList();
+
+                var task = new TotalTask
+                {
+                    Vehicles = vehicles,
+                    Opers = opers,
+                };
+
+                var companies = LoadCompanies(null);
+                task.Locations = companies.Select(c => new Location
+                {
+                    LocationName = c.Name,
+                    Opers = opers.Where(o => o.CompanyID == c.Id).ToList(),
+                }).ToList();
+
+                return task;
+            }
         }
     }
 }
