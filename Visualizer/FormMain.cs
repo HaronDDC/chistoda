@@ -20,7 +20,8 @@ namespace Visualizer
             InitializeComponent();
         }
 
-        private int[] Tasks { get; set; } = new[] { 11, 8, 19, 14, 17, 20, 13, 10, 9, 7, 18, 16, 15, 6, 12 };
+        private int[] Tasks { get; set; } = //new[] { 11, 8, 19, 14, 17, 20, 13, 10, 9, 7, 18, 16, 15, 6, 12 };
+            new[] { 21, 22, 23, 24, 25, 26, 27, 28 };
 
         private List<OptimizeLib.Model.Vehicle> Vehicles { get; set; }
 
@@ -32,6 +33,15 @@ namespace Visualizer
 
         private List<OptimizeLib.Model.Vehicle> AssigmentEq()
         {
+            //DatabaseHelper.CreateTask(2, "Убрать дорогу", 1, 80000);
+            //DatabaseHelper.CreateTask(3, "Сколоть снег", 2, 60000);
+            //DatabaseHelper.CreateTask(4, "Разгребание валов снега на перекрёстках", 3, 40000);
+            //DatabaseHelper.CreateTask(5, "Разгребание валов снега на остановках пассажирского транспорта", 4, 50000);
+            //DatabaseHelper.CreateTask(2, "Убрать дорогу", 5, 80000);
+            //DatabaseHelper.CreateTask(3, "Сколоть снег", 6, 60000);
+            //DatabaseHelper.CreateTask(4, "Сколоть снег", 7, 40000);
+            //DatabaseHelper.CreateTask(5, "Разгребание валов снега на остановках пассажирского транспорта", 8, 50000);
+
             // TaskID = DatabaseHelper.CreateTask(1, "Тестовая задача", 10);
             var assignment = DatabaseHelper.LoadAssignmentInput(Tasks);
 

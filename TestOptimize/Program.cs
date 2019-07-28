@@ -14,7 +14,7 @@ namespace TestOptimize
 		static void Main(string[] args)
 		{
 			// создать задачу по шаблону
-			var taskId = DatabaseHelper.CreateTask(1, "Тестовая задача", 10);
+			var taskId = DatabaseHelper.CreateTask(1, "Тестовая задача", 2, 10);
 			Console.WriteLine("Создана задача по шаблону: {0}", taskId);
 			Console.ReadLine();
 

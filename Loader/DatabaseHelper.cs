@@ -23,7 +23,7 @@ namespace Loader
                 foreach (var company in companies)
                 {
                     var square = company.Square;
-                    tasks.Add(CreateTask(templateTaskId, name, square));
+                    tasks.Add(CreateTask(templateTaskId, name, company.Id, square));
                 }
             }
 
@@ -37,7 +37,7 @@ namespace Loader
 		/// <param name="name">Task name (such as: Убрать снег с Красной Площади).</param>
 		/// <param name="quantity">Quantity (like square to be processed).</param>
 		/// <returns>Returns created task identity.</returns>
-		public static int CreateTask(int templateTaskId, string name, decimal quantity)
+		public static int CreateTask(int templateTaskId, string name, int companyId, decimal quantity)
 		{
 			using (var db = new ChistoDatabase())
 			{
@@ -58,6 +58,7 @@ namespace Loader
 				{
 					Date = DateTime.Now,
 					Name = name,
+                    CompanyId = companyId,
 					Quantity = quantity,
 					TemplateTaskId = templateTaskId,
 				};
