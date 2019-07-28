@@ -51,6 +51,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.lblResult = new System.Windows.Forms.Label();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.gvEq = new System.Windows.Forms.DataGridView();
             this.pageMain.SuspendLayout();
             this.pnlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartCost)).BeginInit();
@@ -62,6 +64,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.edtMaxTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edtVehCost)).BeginInit();
             this.tabControl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEq)).BeginInit();
             this.SuspendLayout();
             // 
             // pageMain
@@ -279,6 +283,7 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.pageMain);
+            this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
@@ -295,6 +300,36 @@
             this.lblResult.Size = new System.Drawing.Size(611, 65);
             this.lblResult.TabIndex = 9;
             this.lblResult.Text = "Единиц техники от времени";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.gvEq);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(991, 855);
+            this.tabPage1.TabIndex = 1;
+            this.tabPage1.Text = "Распределение навесного оборудования";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // gvEq
+            // 
+            this.gvEq.AllowUserToAddRows = false;
+            this.gvEq.AllowUserToDeleteRows = false;
+            this.gvEq.AllowUserToOrderColumns = true;
+            this.gvEq.AllowUserToResizeRows = false;
+            this.gvEq.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gvEq.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gvEq.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.gvEq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvEq.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gvEq.Location = new System.Drawing.Point(3, 3);
+            this.gvEq.MultiSelect = false;
+            this.gvEq.Name = "gvEq";
+            this.gvEq.ReadOnly = true;
+            this.gvEq.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.gvEq.Size = new System.Drawing.Size(985, 849);
+            this.gvEq.TabIndex = 2;
             // 
             // FormMain
             // 
@@ -318,6 +353,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.edtMaxTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edtVehCost)).EndInit();
             this.tabControl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gvEq)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -341,6 +378,8 @@
         private System.Windows.Forms.NumericUpDown edtCountCost;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblResult;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.DataGridView gvEq;
     }
 }
 

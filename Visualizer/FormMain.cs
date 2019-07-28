@@ -1,7 +1,10 @@
-﻿using OptimizeLib.Model;
+﻿using DataModels;
+using Loader;
+using OptimizeLib.Model;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -18,8 +21,84 @@ namespace Visualizer
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {            
+        {
+            AssigmentEq();
             LoadTask();
+        }
+
+        private void AssigmentEq()
+        {
+            var taskId = DatabaseHelper.CreateTask(1, "Тестовая задача", 10);
+            var assignment = DatabaseHelper.LoadAssignmentInput(new[] { taskId });
+
+            List<Tuple<int, EquipmentCompatibility>> listVT = new List<Tuple<int, EquipmentCompatibility>>();
+            List<Tuple<int, EquipmentCompatibility>> listEqT = new List<Tuple<int, EquipmentCompatibility>>();
+            //Dictionary<int, EquipmentCompatibility> listVT = new Dictionary<int, EquipmentCompatibility>();
+            //Dictionary<int, EquipmentCompatibility> listEqT = new Dictionary<int, EquipmentCompatibility>();
+
+            foreach (var comp in assignment.Compatibility)
+            {
+                if (!listVT.Any((g) => g.Item1 == comp.VehicleTypeId))
+                {
+                    listVT.Add(new Tuple<int, EquipmentCompatibility>(comp.VehicleTypeId, comp));
+                }
+
+                if (!listEqT.Any((g) => g.Item1 == comp.EquipmentTypeId))
+                {
+                    listEqT.Add(new Tuple<int, EquipmentCompatibility>(comp.EquipmentTypeId, comp));
+                }
+            }
+
+            int countRows = listVT.Count();
+            int countColumns = listEqT.Count();
+
+            int[,] a = new int[countRows, countColumns];
+            int[,] ba = new int[countRows, countColumns];
+
+            for (int i = 0; i < countRows; i++)
+            {
+                int idV = listVT[i].Item1;
+                for (int j = 0; j < countColumns; j++)
+                {
+                    int idE = listEqT[j].Item1;
+
+                    var f = assignment.Compatibility.FirstOrDefault((b) => b.VehicleTypeId == idV && b.EquipmentTypeId == idE);
+                    a[i, j] = f == null ? int.MaxValue : (int)Math.Ceiling(f.Factor);
+                    ba[i, j] = a[i, j];
+                }
+            }
+
+            List<OptimizeLib.Model.Vehicle> lvv = new List<OptimizeLib.Model.Vehicle>();
+
+            var ddd = Assignment.Assign.Compute(ba, countRows, countColumns);
+
+            gvEq.AutoGenerateColumns = false;
+            gvEq.RowCount = countRows;
+            gvEq.ColumnCount = countColumns;
+            gvEq.RowHeadersWidth = 200;
+
+            for (int i = 0; i < countRows; i++)
+            {
+                gvEq.Rows[i].HeaderCell.Value = listVT[i].Item2.VehicleType.Name;
+                for (int j = 0; j < countColumns; j++)
+                {
+                    if (i == 0)
+                        gvEq.Columns[j].Name = listEqT[j].Item2.EquipmentType.Name;
+
+                    gvEq.Rows[i].Cells[j].Value = a[i, j] == int.MaxValue ? "-" : a[i, j].ToString();
+                    gvEq.Rows[i].Cells[j].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
+            }
+
+            foreach (var d in ddd)
+            {
+                OptimizeLib.Model.Vehicle v = new OptimizeLib.Model.Vehicle();
+
+                var fVT = listVT[d.Item1];
+                var fEq = listEqT[d.Item2];
+
+                gvEq.Rows[d.Item1].Cells[d.Item2].Style.BackColor = Color.LightGreen;
+            }
         }
 
 

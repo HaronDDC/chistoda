@@ -88,10 +88,21 @@ namespace Loader
 				// Типы оборудования
 				var equipTypes = db.EquipmentTypes.ToList();
 
-				// Матрица совместимости
-				var compatibility = db.EquipmentCompatibilities.ToList();
 
-				return new AssignmentInput
+
+                // Матрица совместимости
+                var compatibility = db.EquipmentCompatibilities.Select((et) => new EquipmentCompatibility()
+                {
+                    EquipmentTypeId = et.EquipmentTypeId,
+                    VehicleTypeId = et.VehicleTypeId,
+                    EquipmentType = et.EquipmentType,
+                    VehicleType = et.VehicleType,
+                    Factor = et.Factor,
+                }).ToList();
+
+
+
+                return new AssignmentInput
 				{
 					Operations = operations,
 					VehicleTypes = vehicleTypes,
