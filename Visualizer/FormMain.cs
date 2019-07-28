@@ -199,7 +199,7 @@ namespace Visualizer
         private void UpdateResultCaption()
         {
             if (_bestIdx >= 0)
-                lblResult.Text = $"Оптимальное суммарное количество техники: {_result[_bestIdx].Count}\r\nСуммарная учетная стоимость: {_result[_bestIdx].Cost} руб.\r\nВремя работы: {(int)_result[_bestIdx].MaxTime} мин.";
+                lblResult.Text = $"Оптимальное суммарное количество техники: {_result[_bestIdx].Count:#,##0}\r\nСуммарная учетная стоимость: {_result[_bestIdx].Cost:#,##0} руб.\r\nВремя работы: {(int)_result[_bestIdx].MaxTime} мин.";
             else
                 lblResult.Text = "";
 
