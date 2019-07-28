@@ -20,6 +20,8 @@ namespace Visualizer
             InitializeComponent();
         }
 
+        private int[] Tasks { get; set; } = new[] { 11, 8, 19, 14, 17, 20, 13, 10, 9, 7, 18, 16, 15, 6, 12 };
+
         private List<OptimizeLib.Model.Vehicle> Vehicles { get; set; }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -30,8 +32,8 @@ namespace Visualizer
 
         private List<OptimizeLib.Model.Vehicle> AssigmentEq()
         {
-            var taskId = DatabaseHelper.CreateTask(1, "Тестовая задача", 10);
-            var assignment = DatabaseHelper.LoadAssignmentInput(new[] { taskId });
+            // TaskID = DatabaseHelper.CreateTask(1, "Тестовая задача", 10);
+            var assignment = DatabaseHelper.LoadAssignmentInput(Tasks);
 
             List<Tuple<int, EquipmentCompatibility>> listVT = new List<Tuple<int, EquipmentCompatibility>>();
             List<Tuple<int, EquipmentCompatibility>> listEqT = new List<Tuple<int, EquipmentCompatibility>>();
@@ -101,6 +103,7 @@ namespace Visualizer
                 {
                     EqTypeId = fEq.Item1,
                     VehicleTypeId = fVT.Item1,
+                    Name = fVT.Item2.VehicleType.Name + " + " + fEq.Item2.EquipmentType.Name,
                 };
 
                 gvEq.Rows[d.Item1].Cells[d.Item2].Style.BackColor = Color.LightGreen;
@@ -113,8 +116,13 @@ namespace Visualizer
 
         private void LoadTask()
         {
-            _task = CreateTest();
+            _task = LoadTest(); //CreateTest();
             UpdateSolution();
+        }
+
+        private TotalTask LoadTest()
+        {
+            return DatabaseHelper.LoadTotalTask(Tasks, Vehicles);
         }
 
         private void UpdateSolution()

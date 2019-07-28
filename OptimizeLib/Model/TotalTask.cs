@@ -18,11 +18,11 @@ namespace OptimizeLib.Model
         private List<TechOper> _opers = new List<TechOper>();
         private List<Vehicle> _vehicles = new List<Vehicle>();
 
-        public List<Location> Locations { get => _locations; }
+        public List<Location> Locations { get => _locations; set { _locations = value; } }
 
-        public List<Vehicle> Vehicles { get => _vehicles; }
+        public List<Vehicle> Vehicles { get => _vehicles; set { _vehicles = value; } }
 
-        public List<TechOper> Opers { get => _opers; }
+        public List<TechOper> Opers { get => _opers; set { _opers = value; } }
 
         public static double TimeUsingCost { get { return _timeCost; } set { _timeCost = value; } }
 

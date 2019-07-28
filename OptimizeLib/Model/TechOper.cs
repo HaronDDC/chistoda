@@ -18,6 +18,8 @@ namespace OptimizeLib.Model
         /// </summary>
         public Vehicle Vehicle { get; set; }
 
+        public int CompanyID { get; set; }
+
         private int GetVehicleCount(double square, double maxTime)
         {
             // maxTime = square / (Speed * SpeedReduction(alpha))

@@ -13,7 +13,7 @@ namespace OptimizeLib.Model
         public string LocationName { get; set; }
         public double Square { get; set; }
 
-        public List<TechOper> Opers { get => _opers; }
+        public List<TechOper> Opers { get => _opers; set { _opers = value; } }
 
         public LocationResult GetLocationResult(double maxTime)
         {
