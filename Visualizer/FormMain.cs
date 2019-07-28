@@ -34,33 +34,10 @@ namespace Visualizer
 
         private List<OptimizeLib.Model.Vehicle> AssigmentEq()
         {
-            //var rnd = new Random();
-            //for (var i = 0; i < 100; i++)
-            //{
-            //    var companyId = 1 + rnd.Next(10);
-            //    DatabaseHelper.CreateTask(1, "Разгребание валов снега", companyId, rnd.Next(10) * 1000);
-            //    DatabaseHelper.CreateTask(2, "Убрать дорогу", companyId, rnd.Next(10) * 1000);
-            //    DatabaseHelper.CreateTask(3, "Сколоть снег", companyId, rnd.Next(10) * 1000);
-            //    DatabaseHelper.CreateTask(4, "Сколоть снег", companyId, rnd.Next(10) * 1000);
-            //    DatabaseHelper.CreateTask(5, "Разгребание валов снега", companyId, rnd.Next(10) * 1000);
-            //}
-
-            //DatabaseHelper.CreateTask(2, "Убрать дорогу", 1, 80000);
-            //DatabaseHelper.CreateTask(3, "Сколоть снег", 2, 60000);
-            //DatabaseHelper.CreateTask(4, "Разгребание валов снега на перекрёстках", 3, 40000);
-            //DatabaseHelper.CreateTask(5, "Разгребание валов снега на остановках пассажирского транспорта", 4, 50000);
-            //DatabaseHelper.CreateTask(2, "Убрать дорогу", 5, 80000);
-            //DatabaseHelper.CreateTask(3, "Сколоть снег", 6, 60000);
-            //DatabaseHelper.CreateTask(4, "Сколоть снег", 7, 40000);
-            //DatabaseHelper.CreateTask(5, "Разгребание валов снега на остановках пассажирского транспорта", 8, 50000);
-
-            // TaskID = DatabaseHelper.CreateTask(1, "Тестовая задача", 10);
             var assignment = DatabaseHelper.LoadAssignmentInput(Tasks);
 
             List<Tuple<int, EquipmentCompatibility>> listVT = new List<Tuple<int, EquipmentCompatibility>>();
             List<Tuple<int, EquipmentCompatibility>> listEqT = new List<Tuple<int, EquipmentCompatibility>>();
-            //Dictionary<int, EquipmentCompatibility> listVT = new Dictionary<int, EquipmentCompatibility>();
-            //Dictionary<int, EquipmentCompatibility> listEqT = new Dictionary<int, EquipmentCompatibility>();
 
             foreach (var comp in assignment.Compatibility)
             {
