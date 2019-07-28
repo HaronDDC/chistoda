@@ -11,5 +11,9 @@ namespace OptimizeLib.Model
         public int Code { get; set; }
 
         public string Name { get; set; }
+
+        public int EqTypeId { get; set; }
+
+        public int VehicleTypeId { get; set; }
     }
 }

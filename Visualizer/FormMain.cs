@@ -20,13 +20,15 @@ namespace Visualizer
             InitializeComponent();
         }
 
+        private List<OptimizeLib.Model.Vehicle> Vehicles { get; set; }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            AssigmentEq();
+            Vehicles = AssigmentEq();
             LoadTask();
         }
 
-        private void AssigmentEq()
+        private List<OptimizeLib.Model.Vehicle> AssigmentEq()
         {
             var taskId = DatabaseHelper.CreateTask(1, "Тестовая задача", 10);
             var assignment = DatabaseHelper.LoadAssignmentInput(new[] { taskId });
@@ -92,13 +94,20 @@ namespace Visualizer
 
             foreach (var d in ddd)
             {
-                OptimizeLib.Model.Vehicle v = new OptimizeLib.Model.Vehicle();
-
                 var fVT = listVT[d.Item1];
                 var fEq = listEqT[d.Item2];
 
+                OptimizeLib.Model.Vehicle v = new OptimizeLib.Model.Vehicle
+                {
+                    EqTypeId = fEq.Item1,
+                    VehicleTypeId = fVT.Item1,
+                };
+
                 gvEq.Rows[d.Item1].Cells[d.Item2].Style.BackColor = Color.LightGreen;
+                lvv.Add(v);
             }
+
+            return lvv;
         }
 
 

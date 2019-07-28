@@ -57,7 +57,7 @@ namespace OptimizeLib.Model
 
         public static double GetCostMetrics(double maxTime, int vehCount)
         {
-            return maxTime * TimeUsingCost * vehCount + vehCount  * TimeCountCost;
+            return maxTime * TimeUsingCost * vehCount + vehCount * TimeCountCost;
         }
 
         private int FindGlobalOptimalIdx(List<TotalResult> lst)
@@ -146,7 +146,7 @@ namespace OptimizeLib.Model
             loc.Opers.Add(task.Opers[0]);
             loc.Opers.Add(task.Opers[2]);
             task.Locations.Add(loc);
-        
+
 
             for (int i = 1; i < 10; i++)
             {
@@ -214,5 +214,6 @@ namespace OptimizeLib.Model
             }
 
         }
+
     }
 }

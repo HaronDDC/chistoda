@@ -111,5 +111,27 @@ namespace Loader
 				};
 			}
 		}
-	}
+
+        private static List<Company> LoadCompanies(int[] companyIds)
+        {
+            using (var db = new ChistoDatabase())
+            {
+                return db.Companies.Where(c => companyIds.Contains(c.Id)).ToList();
+            }
+        }
+
+        private static TotalTask CreateRealTask(int[] taskIds)
+        {
+            var res = new TotalTask();
+
+
+            return res;
+        }
+
+        private static void LoadRealVehicles(TotalTask task)
+        {
+
+        }
+    }
 }
+
