@@ -133,6 +133,7 @@ namespace Visualizer
                     int selIdx = gvDistrib.SelectedRows[0].Index;
                     gvDistrib.Rows[selIdx].Selected = false;
                 }
+
                 gvDistrib.Rows[_bestIdx].Selected = true;
             }
         }
