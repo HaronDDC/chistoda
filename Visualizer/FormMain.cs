@@ -21,7 +21,8 @@ namespace Visualizer
         }
 
         private int[] Tasks { get; set; } = //new[] { 11, 8, 19, 14, 17, 20, 13, 10, 9, 7, 18, 16, 15, 6, 12 };
-            new[] { 21, 22, 23, 24, 25, 26, 27, 28 };
+                                            //new[] { 21, 22, 23, 24, 25, 26, 27, 28 };
+            DatabaseHelper.LoadTasks();
 
         private List<OptimizeLib.Model.Vehicle> Vehicles { get; set; }
 
@@ -33,6 +34,17 @@ namespace Visualizer
 
         private List<OptimizeLib.Model.Vehicle> AssigmentEq()
         {
+            //var rnd = new Random();
+            //for (var i = 0; i < 100; i++)
+            //{
+            //    var companyId = 1 + rnd.Next(10);
+            //    DatabaseHelper.CreateTask(1, "Разгребание валов снега", companyId, rnd.Next(10) * 1000);
+            //    DatabaseHelper.CreateTask(2, "Убрать дорогу", companyId, rnd.Next(10) * 1000);
+            //    DatabaseHelper.CreateTask(3, "Сколоть снег", companyId, rnd.Next(10) * 1000);
+            //    DatabaseHelper.CreateTask(4, "Сколоть снег", companyId, rnd.Next(10) * 1000);
+            //    DatabaseHelper.CreateTask(5, "Разгребание валов снега", companyId, rnd.Next(10) * 1000);
+            //}
+
             //DatabaseHelper.CreateTask(2, "Убрать дорогу", 1, 80000);
             //DatabaseHelper.CreateTask(3, "Сколоть снег", 2, 60000);
             //DatabaseHelper.CreateTask(4, "Разгребание валов снега на перекрёстках", 3, 40000);

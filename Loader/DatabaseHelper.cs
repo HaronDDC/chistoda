@@ -30,14 +30,22 @@ namespace Loader
             return tasks.ToArray();
         }
 
-		/// <summary>
-		/// Create task using task template.
-		/// </summary>
-		/// <param name="templateTaskId">Template task (we load template operations from it).</param>
-		/// <param name="name">Task name (such as: Убрать снег с Красной Площади).</param>
-		/// <param name="quantity">Quantity (like square to be processed).</param>
-		/// <returns>Returns created task identity.</returns>
-		public static int CreateTask(int templateTaskId, string name, int companyId, decimal quantity)
+        public static int[] LoadTasks()
+        {
+            using (var db = new ChistoDatabase())
+            {
+                return db.Tasks.Where(t => t.Operationstaskidfkeys.Count() > 0).Select(t => t.Id).ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Create task using task template.
+        /// </summary>
+        /// <param name="templateTaskId">Template task (we load template operations from it).</param>
+        /// <param name="name">Task name (such as: Убрать снег с Красной Площади).</param>
+        /// <param name="quantity">Quantity (like square to be processed).</param>
+        /// <returns>Returns created task identity.</returns>
+        public static int CreateTask(int templateTaskId, string name, int companyId, decimal quantity)
 		{
 			using (var db = new ChistoDatabase())
 			{
@@ -190,6 +198,7 @@ namespace Loader
                 {
                     LocationName = c.Name,
                     Opers = opers.Where(o => o.CompanyID == c.Id).ToList(),
+                    Square = (double)c.Square,
                 }).ToList();
 
                 return task;
